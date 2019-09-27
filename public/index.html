@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- App -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="yoel-noy.jpg">
+
+    <link rel="apple-touch-icon" sizes="76x76" href="yoel-noy.jpg">
+    <link rel="apple-touch-icon" sizes="120x120" href="yoel-noy.jpg">
+    <link rel="apple-touch-icon" sizes="152x152" href="yoel-noy.jpg">
+
+    <link rel="apple-touch-startup-image" href="Photos-Vue-practice/Home-Background.jpg">
+
+    <meta name="NightLife" content="Kojitsu">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- App -->
+    <title>Vue js tutorials</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/Vue-css-3.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://kit.fontawesome.com/dd21d5e485.js"></script>
+
+    <!-- update the version number as needed -->
+    <!-- <script defer src="/__/firebase/6.6.2/firebase-app.js"></script> -->
+    <!-- include only the Firebase features as you need -->
+    <!-- <script defer src="/__/firebase/6.6.2/firebase-auth.js"></script>
+    <script defer src="/__/firebase/6.6.2/firebase-database.js"></script>
+    <script defer src="/__/firebase/6.6.2/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/6.6.2/firebase-storage.js"></script> -->
+    <!-- initialize the SDK after all desired features are loaded -->
+    <!-- <script defer src="/__/firebase/init.js"></script> -->
+
+    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-auth.js"></script> -->
+</head>
+
+
+
+<body>
+    <div id="vue-app" class="body-main">
+
+        <!-- Home Page DIV -->
+
+        <div v-if="showHome" class="home-container">
+            <div class="logo"><img src="./Logo-White-NightLife.png" alt="logo" class="logo-Home"></div>
+
+            <div class="description">Discover the best parties and nightclubs in your city</div>
+            <div class="home-buttons">
+                <button v-on:click="showPartiesOnly" class="btn parties-button"> Parties </button>
+                <button v-on:click="partiesHorizontal" class="btn parties-button-hor"> Parties </button>
+                <button v-on:click="showChatOnly" class="btn chat-button">
+                    <span class="fas fa-comments fa-2x chatSize"></span>
+                </button>
+            </div>
+
+        </div>
+
+        <!-- ----------------------------------------- -->
+
+
+        <!-- Parties Catalog DIV -->
+
+        <div v-if="homeShowParties" class="parties-catalog-container">
+            <header>
+                <div class="back-button">
+                    <button v-on:click="showHomeOnly" class="btn"><span
+                            class="fas fa-chevron-left fa-2x"></span></button>
+                </div>
+
+                <div class="logo-header">
+                    <h2>NightLife</h2>
+                </div>
+
+                <div class="menu-bars">
+                    <div class="dropdown">
+                        <button v-on:click="showDropDown = !showDropDown" class="btn menu-drop-down" type="button"
+                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="fas fa-bars fa-2x"></span>
+                        </button>
+                        <div v-show="showDropDown" class="dropdown-menu dropdown-menu-right show"
+                            aria-labelledby="dropdownMenuButton">
+                            <button v-on:click="showHomeOnly" class="dropdown-item">Home</button>
+                            <button v-on:click="showPartiesOnly" class="dropdown-item">Parties</button>
+                            <button v-on:click="showChatOnly" class="dropdown-item">Chat</button>
+                        </div>
+                    </div>
+
+                </div>
+            </header>
+
+            <div v-for="party in parties" class="parties-vertical">
+                <button class="btn parties-cards  ">
+                    <img v-bind:src="party.cover" v-on:click="showChosenPartyOnly(party)" alt="1" width="300"
+                        class="parties-cards-img">
+                </button>
+            </div>
+
+            <div v-for="party in parties" class="parties-horizontal">
+                <button class="btn parties-cards  ">
+                    <img v-bind:src="party.cover" v-on:click="showChosenPartyOnly(party)" alt="1" width="300"
+                        class="parties-cards-img">
+                </button>
+
+                <div class="hor-4-section">
+                    <div class="hor-4-section-top">
+                        <div class="btn btn-dark parties-horizontal-extra">
+                            {{party.music}}
+                        </div>
+                        <div class="btn btn-dark parties-horizontal-extra">
+                            {{party.hours}}
+                        </div>
+                    </div>
+                    <div class="hor-4-section-bottom">
+                        <button class="btn btn-dark parties-horizontal-extra">
+                            {{party.date}}
+                        </button>
+                        <div class="parties-horizontal-extra ">
+                            <button v-on:click="purchased" class="btn btn-dark price-but-hor"
+                                v-if="party.price == 'FREE'">
+                                Free Entrance
+                            </button>
+                            <button v-on:click="purchased" class="btn btn-dark price-but-hor" v-else>
+                                Tickets {{party.price}} €
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ----------------------------------------- -->
+
+        <!-- Chosen Party DIV -->
+
+        <div v-if="chosenPartyPage" class="party-container chosen chosen-vertical">
+
+            <header>
+                <div class="back-button">
+                    <button v-on:click="showHomeOnly" class="btn"><span
+                            class="fas fa-chevron-left fa-2x"></span></button>
+                </div>
+
+                <div class="logo-header">
+                    <h2>NightLife</h2>
+                </div>
+
+                <div class="menu-bars">
+                    <div class="dropdown">
+                        <button v-on:click="showDropDown = !showDropDown" class="btn menu-drop-down" type="button"
+                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="fas fa-bars fa-2x"></span>
+                        </button>
+                        <div v-show="showDropDown" class="dropdown-menu dropdown-menu-right show"
+                            aria-labelledby="dropdownMenuButton">
+                            <button v-on:click="showHomeOnly" class="dropdown-item">Home</button>
+                            <button v-on:click="showPartiesOnly" class="dropdown-item">Parties</button>
+                            <button v-on:click="showChatOnly" class="dropdown-item">Chat</button>
+                        </div>
+                    </div>
+
+                </div>
+            </header>
+
+            <div class="chosen-cont">
+
+                <div>
+                    <div class="chosen-pic">
+                        <a v-on:click="photoFancyBox">
+                            <img id="hidden-content" v-bind:src="chosenParty.cover" alt="1" class="chosen-pic-img">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="chosen-party-buttons">
+                    <a class="btn btn-warning inside-party-buttons" href="#" role="button"
+                        id="more-photos-button">Photos</a>
+                    <a v-on:click="purchased" class="btn btn-warning inside-party-buttons" href="#" role="button"
+                        id="buy-ticket-button">
+                        <p> {{ price }} </p>
+                    </a>
+                </div>
+
+                <div class="party-description">
+                    <p class="party-description-text"> {{ description }} </p>
+                </div>
+
+                <div class="address">
+                    <p class="address-text"><b>{{ address }}</b></p>
+                </div>
+
+
+                <div v-html="map" class="party-map">
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ------------------ -->
+
+        <div v-if="chosenPartyPage" class="party-container chosen chosen-horizontal">
+
+            <header>
+                <div class="back-button">
+                    <button v-on:click="showHomeOnly" class="btn"><span
+                            class="fas fa-chevron-left fa-2x"></span></button>
+                </div>
+
+                <div class="logo-header">
+                    <h2>NightLife</h2>
+                </div>
+
+                <div class="menu-bars">
+                    <div class="dropdown">
+                        <button v-on:click="showDropDown = !showDropDown" class="btn menu-drop-down" type="button"
+                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="fas fa-bars fa-2x"></span>
+                        </button>
+                        <div v-show="showDropDown" class="dropdown-menu dropdown-menu-right show"
+                            aria-labelledby="dropdownMenuButton">
+                            <button v-on:click="showHomeOnly" class="dropdown-item">Home</button>
+                            <button v-on:click="showPartiesOnly" class="dropdown-item">Parties</button>
+                            <button v-on:click="showChatOnly" class="dropdown-item">Chat</button>
+                        </div>
+                    </div>
+
+                </div>
+            </header>
+
+            <div class="chosen-cont">
+
+                <div class="chosen-party-hor-upper-div">
+                    <div class="chosen-pic-hor">
+                        <a v-on:click="photoFancyBox">
+                            <img id="hidden-content" v-bind:src="chosenParty.cover" alt="1" class="chosen-pic-img-hor">
+                        </a>
+                    </div>
+
+                    <div class="party-description-hor">
+                        <p class="party-description-text-hor"> {{ description }} </p>
+                    </div>
+                </div>
+
+                <div class="chosen-hor-middle">
+                    <div class="chosen-party-buttons-hor">
+                        <a class="btn btn-warning inside-party-buttons-hor" href="#" role="button"
+                            id="more-photos-button">Photos</a>
+                        <a v-on:click="purchased" class="btn btn-warning inside-party-buttons-hor" href="#"
+                            role="button" id="buy-ticket-button">
+                            <p> {{ price }} </p>
+                        </a>
+                    </div>
+
+                    <div class="address-hor">
+                        <p class="address-text-hor"><b>{{ address }}</b></p>
+                    </div>
+                </div>
+
+                <div v-html="map" class="party-map-hor"></div>
+
+            </div>
+        </div>
+
+        <!-- ----------------------------------------- -->
+
+
+
+        <!-- Chat DIV -->
+
+        <!-- Chat - Main Page  -->
+
+        <div v-if="homeShowChat" class="chat-main">
+            <header>
+                <div class="back-button">
+                    <button v-on:click="showHomeOnly" class="btn"><span
+                            class="fas fa-chevron-left fa-2x"></span></button>
+                </div>
+
+                <div class="logo-header">
+                    <h2>NightLife</h2>
+                </div>
+
+                <div class="menu-bars">
+                    <div class="dropdown">
+                        <button v-on:click="showDropDown = !showDropDown" class="btn menu-drop-down" type="button"
+                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="fas fa-bars fa-2x"></span>
+                        </button>
+                        <div v-show="showDropDown" class="dropdown-menu dropdown-menu-right show"
+                            aria-labelledby="dropdownMenuButton">
+                            <button v-on:click="showHomeOnly" class="dropdown-item">Home</button>
+                            <button v-on:click="showPartiesOnly" class="dropdown-item">Parties</button>
+                            <button v-on:click="showChatOnly" class="dropdown-item">Chat</button>
+                        </div>
+                    </div>
+
+                </div>
+            </header>
+
+            <div class="chat-login-info">
+
+                <h5 class="chat-login-btn">Come meet new people</h5>
+                <div class="chat-login-form">
+                    <span class="pass-hor">
+                        <div class="form-group">
+                            <label for="exampleDropdownFormEmail2">Email address</label>
+                            <input type="email" class="form-control" id="exampleDropdownFormEmail2"
+                                placeholder="email@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleDropdownFormPassword2">Password</label>
+                            <input type="password" class="form-control" id="exampleDropdownFormPassword2"
+                                placeholder="Password">
+                        </div>
+                    </span>
+
+
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="dropdownCheck2">
+                            <label class="form-check-label" for="dropdownCheck2">
+                                Remember me
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <button v-on:click="googleSignIn" type="submit" class="btn google-btn"><img src="./google_PNG19644.png" alt="1" width="50"></button>
+                        <button v-on:click="normalSignIn" type="submit" class="btn btn-dark">Sign in</button>
+                    </div>
+                    
+                    <div class="dropdown-divider"></div>
+                    <div>
+                        <a class="dropdown-item" href="#">New around here? Sign up</a>
+                        <a class="dropdown-item" href="#">Forgot password?</a>
+                    </div>
+                </div>
+                <p class="copyright">Copyright 2019 | Nightlife.Es </p>
+
+
+
+            </div>
+
+        </div>
+
+        <!-- Chat - Text Page  -->
+        <div v-if="chatText" class="chat-main-text">
+            <header class="header-chat-text">
+                <div class="back-button">
+                    <button v-on:click="showHomeOnly" class="btn"><span
+                            class="fas fa-chevron-left fa-2x"></span></button>
+                </div>
+
+                <div class="logo-header">
+                    <h2>NightLife</h2>
+                </div>
+
+                <div class="menu-bars">
+                    <div class="dropdown">
+                        <button v-on:click="showDropDown = !showDropDown" class="btn menu-drop-down" type="button"
+                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="fas fa-bars fa-2x"></span>
+                        </button>
+                        <div v-show="showDropDown" class="dropdown-menu dropdown-menu-right show"
+                            aria-labelledby="dropdownMenuButton">
+                            <button v-on:click="showHomeOnly" class="dropdown-item">Home</button>
+                            <button v-on:click="showPartiesOnly" class="dropdown-item">Parties</button>
+                            <button v-on:click="showChatOnly" class="dropdown-item">Chat</button>
+                        </div>
+                    </div>
+
+                </div>
+            </header>
+
+            <div class="chat-text-main">
+                <div class="chat-msg">
+
+                </div>
+                <div class="chat-send">
+                    <div class="text-input">
+                        <input class="msg-box" type="text" placeholder="Write a message here...">
+                    </div>
+                    <div class="send">
+                        <button class="btn"><span class="fas fa-paper-plane fa-2x send-icon"></span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ----------------------------------------- -->
+
+
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDCSlDfea5HfeTkmiLWDzA-Uqcp8gtvioU",
+            authDomain: "nightlife-463ec.firebaseapp.com",
+            databaseURL: "https://nightlife-463ec.firebaseio.com",
+            projectId: "nightlife-463ec",
+            storageBucket: "",
+            messagingSenderId: "174742692587",
+            appId: "1:174742692587:web:2bd2504fdb0e674ef994ae",
+            measurementId: "G-KBY4SYZLMJ"
+            };
+            firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    <script src="js/Vue-javascript-3.js"></script>
+    <script src="js/fancybox.js"></script>
+    <!-- <script src="/__/firebase/init.js"></script> -->
+
+</body>
+
+</html>

@@ -1,0 +1,683 @@
+@media (min-width: 300px) and (orientation: portrait) {
+/* --------------------------- Home Page */
+header {
+    display: flex;
+    height: 50px;
+    width: 375px;
+    border-bottom: solid 1px;
+}
+.chosen-vertical {
+    display: block;
+    width: 375px;
+}
+.parties-vertical {
+    display: inline;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0px;
+}
+
+.parties-horizontal {
+    display: none;
+    
+}
+
+.chosen-horizontal {
+    display: none;
+    
+}
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('../Home-Background.jpg');
+    background-size: 140%;
+    height: 667px;
+    background-repeat: no-repeat;
+}
+
+.logo,
+.description,
+.parties-button,
+.chat-button {
+    font-size: 27px;
+    padding: 5px;
+    width: 200px;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+}
+
+.logo {
+    margin-top: 0px;
+    width: 326px;
+    display: flex;
+    justify-content: center;
+}
+
+.logo-Home {
+    width: 375px;
+    height: 231px;
+}
+
+.description {
+    height: 200px;
+    width: 80%;
+    margin-top: -25px;
+    color: white;
+}
+
+.home-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.parties-button {
+    margin-top: -15px;
+    font-size: 40px;
+}
+
+.chat-button {
+    margin-top: 25px;
+    color: white;
+}
+
+
+
+
+/* --------------------------- */
+header {
+    display: flex;
+    height: 50px;
+    width: 100%;
+    border-bottom: solid 1px;
+}
+
+.back-button {
+    width: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fa-chevron-left {
+    margin-right: 25px;
+}
+
+.logo-header {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-bars {
+    width: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-drop-down {
+    width: 55px;
+    padding: 0px 0px;
+}
+
+.dropdown-menu {
+    min-width: 50px;
+}
+
+.fa-bars {
+    margin-left: 25px;
+}
+
+.strip-menu {
+    width: 24%;
+}
+
+.parties {
+    width: 375px;
+    display: flex;
+    justify-content: center;
+    margin: 25px 0px;
+}
+
+/* --------------------------- Parties Catalog Page */
+header {
+    margin-bottom: 25px;
+}
+
+.parties-catalog-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.parties-cards {
+    padding: 0px 0px;
+    margin: 0px 0px;
+    margin-bottom: 5px;
+}
+
+.parties-cards-li {
+    display: flex;
+    justify-content: center;
+}
+
+.parties-cards-img {
+    width: 95%;
+}
+
+/* --------------------------- */
+.card-container {
+    height: 121px;
+    margin: 3px 5px;
+    padding: 0px 0px;
+    display: flex;
+    justify-content: center;
+}
+
+.card-pic {
+    height: 121px;
+    width: 289px;
+}
+
+.chosen-pic {
+    margin: 54px 8px;
+    margin-bottom: 10px;
+}
+
+.chosen-pic-img {
+    width: 360px;
+}
+
+.chosen-party-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0px;
+}
+
+.inside-party-buttons {
+    width: 170px;
+    height: 40px;
+}
+
+.party-description {
+    display: flex;
+    justify-content: center
+}
+
+.party-description-text {
+    width: 330px;
+}
+
+.party-map {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.address {
+    display: flex;
+    justify-content: center
+}
+
+.address-text {
+    width: 333px;
+    height: 60px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 0px;
+}
+
+iframe {
+    width: 333px;
+    height: 200px;
+}
+
+ul {
+    padding: 0px 0px;
+}
+
+/* --------------------------- Parties Catalog Page */
+
+.chat-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 375px;
+    height: 667px;
+}
+
+.chat-header {
+    display: flex;
+    height: 50px;
+    border-bottom: solid 1px;
+}
+
+.chat-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('');
+    background-size: 140%;
+    height: 667px;
+    width: 375px;
+    background-repeat: no-repeat;
+
+}
+
+.chat-login-info {
+    height: 667px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+h5 {
+    font-size: 30px;
+    margin-bottom: 85px;
+    font-weight: bold;
+}
+
+.dropdown-divider {
+    display: flex;
+    justify-content: center;
+}
+
+.chat-login-form {
+    width: 325px;
+    height: 345px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 50px;
+    position: relative;
+    bottom: 50px;
+
+}
+
+.chat-screen {
+    width: 325px;
+    height: 667px;
+}
+.chat-msg{
+    height: 529px;
+    background-color: lightgrey;
+}
+
+.chat-send {
+    border-top: solid 1px;
+    width: 375px;
+    height: 90px;
+    display: flex;
+    /* justify-content: flex-end; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.text-input {
+    border: solid 1px;
+    width: 285px;
+    height: 49px;
+
+}
+
+.send {
+    border: solid 1px;
+    width: 70px;
+    height: 49px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.send-icon {
+    font-size: 1.2em;
+}
+.header-chat-text{
+    display: flex;
+    height: 50px;
+    width: 375px;
+    border-bottom: solid 1px;
+    margin: 0px 0px;
+}
+.msg-box{
+    width: 100%;
+    height: 100%;
+}
+.google-btn{
+    border: solid 1px black;
+    text-align: center;
+}
+
+
+}
+
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+
+
+
+@media (min-width: 600px) and (orientation: landscape) {
+    
+    header {
+        display: flex;
+        justify-content: center;
+        justify-content: space-evenly;
+        height: 50px;
+        width: 667px;
+        border-bottom: solid 1px;
+    }
+    .chat-header {
+        display: flex;
+        height: 50px;
+        border-bottom: solid 1px;
+    }
+    .menu-bars{
+        margin-left: 180px; 
+    }
+    .back-button{
+        margin-right: 180px;
+    }
+    .chosen-vertical {
+        display: none;
+    }
+
+    .chosen-horizontal {
+        display: block;
+        width: 650px;
+    }
+    
+
+    .home-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-image: url('../Home-Background.jpg');
+        background-size: 100%;
+        height: 375px;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+    }
+
+    .logo-Home {
+        width: 324px;
+        height: 177px;
+    }
+
+    .description {
+        height: 96px;
+        width: 80%;
+        font-size: 28px;
+        color: white;
+        text-align: center;
+        font-weight: bold
+    }
+
+    .home-buttons {
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .chat-button {
+        margin-top: 0px;
+        color: white;
+    }
+
+    .parties-button {
+        display: none;
+    }
+
+
+    .parties-button-hor {
+        display: inline;
+        margin-top: -15px;
+        font-size: 40px;
+
+        padding: 5px;
+        width: 200px;
+        text-align: center;
+        font-weight: bold;
+        color: white;
+    }
+
+    .chatSize {
+        font-size: 0.5em;
+    }
+
+    .fa-2x {
+        font-size: 1.2em;
+    }
+
+    .parties-vertical {
+        display: none;
+    }
+
+    .parties-horizontal {
+        display: inline;
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 0px;
+    }
+
+    .parties-cards {
+        width: 60%;
+        margin-bottom: 0px;
+
+    }
+
+    .hor-4-section {
+        display: inline;
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        padding-top: 5px;
+}
+
+    
+
+    .hor-4-section-top {
+
+        display: flex;
+        flex-direction: row;
+        height: 50%;
+    }
+
+    .hor-4-section-bottom {
+
+        display: flex;
+        flex-direction: row;
+        height: 50%;
+    }
+
+    .parties-horizontal-extra {
+        min-width: 46%;
+        max-width: 46%;
+        min-height: 45%;
+        max-height: 90%;
+        margin: 0px 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .price-but-hor {
+        width: 100%;
+        height: 100%;
+    }
+
+    .chosen-pic-hor {
+        margin: 0px 15px;
+        width: 65%;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .chosen-party-hor-upper-div {
+        display: flex;
+        height: 195px;
+        margin-top: 10px;
+    }
+
+    .party-description-hor {
+        width: 40%;
+        margin-right: 15px;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .party-description-text-hor {
+        width: 100%;
+        
+    }
+
+    .chosen-pic-img-hor {
+       width: 100%;
+        margin-top: 7px;
+    }
+
+    .chosen-hor-middle {
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        justify-content: space-around;
+        width: 100%;
+        
+    }
+
+    .chosen-party-buttons-hor {
+        margin: 15px 0px;
+        width: 38%;
+        height: 41px;
+        display: flex;
+        justify-content: space-around;
+    }
+    .address-hor {
+        width: 60%;
+        display: flex;
+        justify-content: center;
+    }
+    .inside-party-buttons-hor{
+        width: 45%;
+        height: 100%;
+        font-size: 14.2px;
+    }
+
+    .address-text-hor {
+        width: 100%;
+        text-align: center;
+    }
+
+    .party-map-hor {
+       display: flex;
+       justify-content: center;
+
+    }
+    iframe {
+        width: 100%;
+        height: 150px;
+        margin: 25px 15px;
+        
+    }
+    
+    
+    .chat-main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 375px;
+        
+    }
+    .chat-login-form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    h5{
+        margin: 15px 0px;
+        text-align: center;
+        
+    }
+    .pass-hor{
+        display: inline;
+        display: flex;
+        flex-direction: row;
+    }
+    .copyright{
+        text-align: center;
+    }
+    .chat-main-text{
+        display: flex;
+        flex-direction: column;
+        height: 375px;
+    }
+    .chat-text-main{
+        display: flex;
+        flex-direction: column;
+        height: 322px;
+    }
+
+    .chat-msg{
+        width: 667px;
+        height: 529px;
+        background-color: lightgrey;
+    }
+    .chat-send {
+        border-top: solid 1px;
+        width: 667px;
+        height: 90px;
+        display: flex;
+        /* justify-content: flex-end; */
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 5px 0px;
+    }
+    .text-input {
+        border: solid 1px;
+        width: 550px;
+        height: 49px;
+    
+    }
+    .send {
+        border: solid 1px;
+        width: 70px;
+        height: 49px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .msg-box{
+        width: 100%;
+        height: 100%;
+    }
+    .google-btn{
+        border: solid 1px black;
+        text-align: center;
+    }
+    
+    
+
+    
+}
