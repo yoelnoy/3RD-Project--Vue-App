@@ -19,5 +19,8 @@
 
 // });
 
+// $('#test-div-info').append('<div class="myMsg"><p>' + name + '</p></div>' 
+// + '<div class="myMsg2"><p>' + message +'</p></div>');
+
 
 

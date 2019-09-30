@@ -11,20 +11,20 @@ const myApp = new Vue({
         price: 0,
         showChosenParty: false,
         euroSign: 0,
-        username:'',
-        userEmail:'',
-        resultObject:[],
-        
-        
+        username: '',
+        userEmail: '',
+        resultObject: [],
+
+
 
         mainText: document.getElementById("mainText"),
         submitBtn: document.getElementById("submitBtn"),
         fireHeading: document.getElementById("fireHeading"),
 
         // firebaseHeadingRef: firebase.database().ref().child('Heading'),
-        
 
-        
+
+
         chosenParty: [{
 
         }],
@@ -37,16 +37,16 @@ const myApp = new Vue({
 
 
         parties: [{
-            name: 'COSTA SOCIAL CLUB',
-            description: 'FRIDAY AT COSTA SOCIAL CLUB SPECIAL GUEST: ENGEL PRESENTS "PÉGATE" MUSIC BY: JAVS, MZS and LA ROSA NARCOTICA',
-            address: 'ENGEL @ COSTA SOCIAL CLUB',
-            map: '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.313445945747!2d-3.6886359494135097!3d40.446198961670085!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4228e660ae606b%3A0xc9a004d849b7dadb!2sCalle%20de%20Joaqu%C3%ADn%20Costa%2C%2027%2C%2028002%20Madrid!5e0!3m2!1sen!2ses!4v1568722182703!5m2!1sen!2ses" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>',
-            music: 'HIP HOP',
-            url: 'https://xceed.me/events/madrid/76429/friday-20th-w-engel-costa-social-club',
-            cover: 'https://res.cloudinary.com/xceed-me/image/upload/f_auto/v1568719422/events/cover/friday-20th-w-engel-costa-social-club-1568719421.jpeg.jpg',
-            date: 'Fri 20-Sep-2019',
-            price: '12',
-            hours: '23:59 to 6:00'
+                name: 'COSTA SOCIAL CLUB',
+                description: 'FRIDAY AT COSTA SOCIAL CLUB SPECIAL GUEST: ENGEL PRESENTS "PÉGATE" MUSIC BY: JAVS, MZS and LA ROSA NARCOTICA',
+                address: 'ENGEL @ COSTA SOCIAL CLUB',
+                map: '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.313445945747!2d-3.6886359494135097!3d40.446198961670085!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4228e660ae606b%3A0xc9a004d849b7dadb!2sCalle%20de%20Joaqu%C3%ADn%20Costa%2C%2027%2C%2028002%20Madrid!5e0!3m2!1sen!2ses!4v1568722182703!5m2!1sen!2ses" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>',
+                music: 'HIP HOP',
+                url: 'https://xceed.me/events/madrid/76429/friday-20th-w-engel-costa-social-club',
+                cover: 'https://res.cloudinary.com/xceed-me/image/upload/f_auto/v1568719422/events/cover/friday-20th-w-engel-costa-social-club-1568719421.jpeg.jpg',
+                date: 'Fri 20-Sep-2019',
+                price: '12',
+                hours: '23:59 to 6:00'
             },
             {
                 name: 'Universiparty',
@@ -154,7 +154,7 @@ const myApp = new Vue({
                 cover: 'https://res.cloudinary.com/xceed-me/image/upload/c_fill,f_auto,h_241,w_650/v1568203853/events/cover/sanpapa-club-opening-party-1568203852.jpeg.jpg',
                 date: 'Sat 28-Sep-2019',
                 price: '15',
-                hours: '23:59 to 6:00' 
+                hours: '23:59 to 6:00'
             },
         ],
     },
@@ -180,11 +180,11 @@ const myApp = new Vue({
             this.chosenPartyPage = false;
             this.chosenParty = party;
             this.price = this.chosenParty.price;
-            if(this.price == 'FREE'){
+            if (this.price == 'FREE') {
                 this.price = 'Free Entrance';
-            }else{
+            } else {
 
-                this.price = 'Tickets ' + this.chosenParty.price +  ' €' ;
+                this.price = 'Tickets ' + this.chosenParty.price + ' €';
             }
         },
         showChatOnly: function () {
@@ -203,15 +203,15 @@ const myApp = new Vue({
             this.chosenPartyPage = false;
             this.chatText = true;
         },
-        photoFancyBox: function (e) { 
-                $.fancybox.open({
-                    src  : '#hidden-content',
-                    opts : {
-                        afterClose: function() {
-                            $("#hidden-content").show();
-                        }
+        photoFancyBox: function (e) {
+            $.fancybox.open({
+                src: '#hidden-content',
+                opts: {
+                    afterClose: function () {
+                        $("#hidden-content").show();
                     }
-                });
+                }
+            });
         },
 
         showChosenPartyOnly: function (party) {
@@ -227,11 +227,11 @@ const myApp = new Vue({
             this.address = this.chosenParty.address;
             this.map = this.chosenParty.map;
             this.price = this.chosenParty.price;
-            if(this.price == 'FREE'){
+            if (this.price == 'FREE') {
                 this.price = 'Free Entrance';
-            }else{
+            } else {
 
-                this.price = 'Tickets ' + this.chosenParty.price +  ' €' ;
+                this.price = 'Tickets ' + this.chosenParty.price + ' €';
             }
         },
         partiesHorizontal: function () {
@@ -242,60 +242,72 @@ const myApp = new Vue({
             this.showDropDown = false;
             this.chosenPartyPage = false;
 
-            for (let i = 0 ; i <this.parties.length ; i++ ){
-                this.counter = this.counter +1;
-                if(this.parties[i].price == 'FREE'){
+            for (let i = 0; i < this.parties.length; i++) {
+                this.counter = this.counter + 1;
+                if (this.parties[i].price == 'FREE') {
                     this.price = 'Free Entrance';
-                }else{
-    
-                    this.price = 'Tickets ' + this.parties[i].price +  ' €' ;
+                } else {
+
+                    this.price = 'Tickets ' + this.parties[i].price + ' €';
                 }
             }
-            
-            
+
+
         },
-        purchased: function (){
+        purchased: function () {
             alert('You are IN!!!');
         },
-        normalSignIn: function(){
+        normalSignIn: function () {
             let email = "someEmail";
             let password = "somePassword";
             firebase.auth().normalSignIn(email, password);
         },
-        googleSignIn:function (){
+        googleSignIn: function () {
             let provider = new firebase.auth.GoogleAuthProvider();
-            firebase.auth().signInWithPopup(provider).then(function(result){
+            firebase.auth().signInWithPopup(provider).then(function (result) {
                 this.resultObject = result;
                 myApp.username = result.user.displayName;
                 myApp.userEmail = result.user.email;
                 console.log(resultObject);
 
-            }); 
+            });
             console.log(this.username + '1');
             console.log(this.resultObject);
-            
+
         },
-        
-        submitClick: function (){
-            document.getElementById('chatText3').value = '';
+
+        submitClick: function () {
+            const myNode = document.getElementById("test-div-info");
+            myNode.innerHTML = '';
+           
+            console.log('ghbhg');
             
+            
+
+            /*
+                const parent = document.getElementById("test-div-info");
+                while (parent.firstChild) {
+                    parent.firstChild.remove();
+                }
+            */
             myApp.sendInformationDatabase();
             myApp.receiveInformationDatabase();
+            document.getElementById('mainText').value = '';
 
             //-------------------------------------//
-            
+
 
 
             //-----------------------------------------//
-            
+
         },
 
-        sendInformationDatabase:function(){
+        sendInformationDatabase: function () {
             let messageText = mainText.value;
             let newKey = firebase.database().ref('/Users').push().key;
 
             let updates = {};
-            updates['Users/' + newKey] ={
+            updates['Users/' + newKey] = {
                 userName: myApp.username,
                 message: messageText
             }
@@ -303,26 +315,32 @@ const myApp = new Vue({
 
         },
 
-        receiveInformationDatabase:function(){
-            console.log("HOLA")
-            firebase.database().ref('Users').on('value', function(data){
-                console.log(data.val());
-                
+        receiveInformationDatabase: function () {
+            firebase.database().ref('Users').once('value', function (data) {
+                let datos = data.val();
+
+                for (mensaje in datos) {
+                    let name = datos[mensaje].userName
+                    let message = datos[mensaje].message
+                    $('#test-div-info').append('<div class="myMsg"><p>' + name + '</p></div>' + '<div class="myMsg2"><p>' + message + '</p></div>');
+
+                }
+
             })
         },
 
 
 
-        signOut: function (){
-            firebase.auth().signOut().then(function() {
-            
-          }).catch(function(error) {
-            
-          });
-          console.log('signed out');
-          
+        signOut: function () {
+            firebase.auth().signOut().then(function () {
+
+            }).catch(function (error) {
+
+            });
+            console.log('signed out');
+
         }
-        
+
 
         // firebaseHeadingRefFunction: function(){
         //     this.firebaseHeadingRef = firebaseHeadingRef.on('value', function(datasnapshot){
@@ -330,13 +348,11 @@ const myApp = new Vue({
         //     });
         //     console.log('this is working also');
         // }
-        
-        
-        
+
+
+
     },
 
 
 
 });
-
-

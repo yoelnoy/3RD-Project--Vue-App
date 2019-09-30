@@ -391,7 +391,7 @@
                 </div>
                 <div class="chat-send">
                     <div class="text-input">
-                        <input id="mainText" class="msg-box" type="text" placeholder="Write a message here...">
+                        <input v-on:keyup.enter="submitClick" id="mainText"  class="msg-box" type="text" placeholder="Write a message here...">
                     </div>
                     <div class="send">
                         <button id="submitBtn" @click="submitClick" class="btn"><span class="fas fa-paper-plane fa-2x send-icon"></span></button>
