@@ -1,16 +1,29 @@
-new Vue({
+const myApp = new Vue({
     el: '#vue-app',
     data: {
         myName: 'Yoel',
         counter: 0,
         showHome: false,
         homeShowParties: false,
-        homeShowChat: true,
-        chatText: false,
+        homeShowChat: false,
+        chatText: true,
         showDropDown: false,
         price: 0,
         showChosenParty: false,
         euroSign: 0,
+        username:'',
+        userEmail:'',
+        resultObject:[],
+        
+        
+
+        mainText: document.getElementById("mainText"),
+        submitBtn: document.getElementById("submitBtn"),
+        fireHeading: document.getElementById("fireHeading"),
+
+        // firebaseHeadingRef: firebase.database().ref().child('Heading'),
+        
+
         
         chosenParty: [{
 
@@ -251,10 +264,71 @@ new Vue({
         },
         googleSignIn:function (){
             let provider = new firebase.auth.GoogleAuthProvider();
-            firebase.auth().signInWithPopup(provider);
+            firebase.auth().signInWithPopup(provider).then(function(result){
+                this.resultObject = result;
+                myApp.username = result.user.displayName;
+                myApp.userEmail = result.user.email;
+                console.log(resultObject);
+
+            }); 
+            console.log(this.username + '1');
+            console.log(this.resultObject);
+            
         },
-        // signOut: function(){
-        //     fireBase.auth().signOut();
+        
+        submitClick: function (){
+            document.getElementById('chatText3').value = '';
+            
+            myApp.sendInformationDatabase();
+            myApp.receiveInformationDatabase();
+
+            //-------------------------------------//
+            
+
+
+            //-----------------------------------------//
+            
+        },
+
+        sendInformationDatabase:function(){
+            let messageText = mainText.value;
+            let newKey = firebase.database().ref('/Users').push().key;
+
+            let updates = {};
+            updates['Users/' + newKey] ={
+                userName: myApp.username,
+                message: messageText
+            }
+            firebase.database().ref().update(updates);
+
+        },
+
+        receiveInformationDatabase:function(){
+            console.log("HOLA")
+            firebase.database().ref('Users').on('value', function(data){
+                console.log(data.val());
+                
+            })
+        },
+
+
+
+        signOut: function (){
+            firebase.auth().signOut().then(function() {
+            
+          }).catch(function(error) {
+            
+          });
+          console.log('signed out');
+          
+        }
+        
+
+        // firebaseHeadingRefFunction: function(){
+        //     this.firebaseHeadingRef = firebaseHeadingRef.on('value', function(datasnapshot){
+        //         this.fireHeading.innerHTML = datasnapshot.val();
+        //     });
+        //     console.log('this is working also');
         // }
         
         
@@ -264,3 +338,5 @@ new Vue({
 
 
 });
+
+

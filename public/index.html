@@ -335,7 +335,7 @@
                     </div>
                     <div>
                         <button v-on:click="googleSignIn" type="submit" class="btn google-btn"><img src="./google_PNG19644.png" alt="1" width="50"></button>
-                        <button v-on:click="normalSignIn" type="submit" class="btn btn-dark">Sign in</button>
+                        <button v-on:click="showChatTextOnly" type="submit" class="btn btn-dark">Sign in</button>
                     </div>
                     
                     <div class="dropdown-divider"></div>
@@ -353,7 +353,7 @@
         </div>
 
         <!-- Chat - Text Page  -->
-        <div v-if="chatText" class="chat-main-text">
+        <div id="chatText1" v-if="chatText" class="chat-main-text">
             <header class="header-chat-text">
                 <div class="back-button">
                     <button v-on:click="showHomeOnly" class="btn"><span
@@ -379,18 +379,22 @@
                     </div>
 
                 </div>
+
+                <button v-on:click="signOut">Sign Out</button>
             </header>
 
-            <div class="chat-text-main">
-                <div class="chat-msg">
+            <div id="chatText2" class="chat-text-main">
+                <div id="chatText3" class="chat-msg">
+                    <div id="test-div-info">
 
+                    </div>
                 </div>
                 <div class="chat-send">
                     <div class="text-input">
-                        <input class="msg-box" type="text" placeholder="Write a message here...">
+                        <input id="mainText" class="msg-box" type="text" placeholder="Write a message here...">
                     </div>
                     <div class="send">
-                        <button class="btn"><span class="fas fa-paper-plane fa-2x send-icon"></span></button>
+                        <button id="submitBtn" @click="submitClick" class="btn"><span class="fas fa-paper-plane fa-2x send-icon"></span></button>
                     </div>
                 </div>
             </div>
@@ -420,6 +424,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
     <script src="js/Vue-javascript-3.js"></script>
+    <script src="js/testing.js"></script>
     <script src="js/fancybox.js"></script>
     <!-- <script src="/__/firebase/init.js"></script> -->
 
