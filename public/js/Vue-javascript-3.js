@@ -4,9 +4,9 @@ const myApp = new Vue({
         myName: 'Yoel',
         counter: 0,
         showHome: false,
-        homeShowParties: false,
+        homeShowParties: true,
         homeShowChat: false,
-        chatText: true,
+        chatText: false,
         showDropDown: false,
         price: 0,
         showChosenParty: false,
@@ -14,6 +14,12 @@ const myApp = new Vue({
         username: '',
         userEmail: '',
         resultObject: [],
+        filteredPartyArray: [],
+        filterDiv: false,
+        monthByCliking: 0,
+        chosenMonth: 'January',
+        month: 'January',
+        monthsArray: ['January', 'Februery', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 
 
 
@@ -46,6 +52,7 @@ const myApp = new Vue({
                 cover: 'https://res.cloudinary.com/xceed-me/image/upload/f_auto/v1568719422/events/cover/friday-20th-w-engel-costa-social-club-1568719421.jpeg.jpg',
                 date: 'Fri 20-Sep-2019',
                 price: '12',
+                month: 'october',
                 hours: '23:59 to 6:00'
             },
             {
@@ -58,6 +65,7 @@ const myApp = new Vue({
                 cover: 'https://www.taquilla.com/data/images/t/0d/fabrik-reggaeton-clasico.jpg',
                 date: 'Sat 21-Sep-2019',
                 price: '15',
+                month: 'october',
                 hours: ' 23:30 to 6:00'
             },
             {
@@ -70,6 +78,7 @@ const myApp = new Vue({
                 cover: 'https://res.cloudinary.com/xceed-me/image/upload/f_auto/v1563267466/events/cover/natura-sunday-wade-1563267464.png.jpg',
                 date: 'Sun 29-Sep-2019',
                 price: '18',
+                month: 'october',
                 hours: '17:00 to 1:00'
             },
             {
@@ -82,6 +91,7 @@ const myApp = new Vue({
                 cover: 'https://res.cloudinary.com/xceed-me/image/upload/c_fill,f_auto,h_241,w_650/v1567784395/events/cover/fractal-jueves-3-octubre-1567784394.jpeg.jpg',
                 date: 'Thu 3-Oct-2019',
                 price: 'FREE',
+                month: 'september',
                 hours: '23:45 to 6:00'
             },
             {
@@ -94,6 +104,7 @@ const myApp = new Vue({
                 cover: 'https://res.cloudinary.com/xceed-me/image/upload/f_auto/v1566843109/events/cover/stardust-invites-the-empire-line-live-noele-1566843108.jpeg.jpg',
                 date: 'Fri 20-Sep-2019',
                 price: 'FREE',
+                month: 'september',
                 hours: '23:59 to 6:00'
             },
             {
@@ -106,6 +117,7 @@ const myApp = new Vue({
                 cover: 'https://res.cloudinary.com/xceed-me/image/upload/f_auto/v1561478838/events/cover/get-addicted-1561478836.png.jpg',
                 date: 'Tue 17-Sep-2019',
                 price: 'FREE',
+                month: 'september',
                 hours: '23:45 to 6:00'
             },
             {
@@ -118,6 +130,7 @@ const myApp = new Vue({
                 cover: 'https://res.cloudinary.com/xceed-me/image/upload/f_auto/v1559919912/events/cover/viernes-teatro-kapital-1559919911.jpeg.jpg',
                 date: 'Fri 20-Sep-2019',
                 price: '17',
+                month: 'september',
                 hours: '23:45 to 6:00'
             },
             {
@@ -130,6 +143,7 @@ const myApp = new Vue({
                 cover: 'https://images.musement.com/cover/0033/64/thumb_3263178_cover_header.jpeg?&q=60&fit=crop&h=400&lossless=true&auto=format&w=1399',
                 date: 'Thu 19-Sep-2019',
                 price: '12',
+                month: 'september',
                 hours: '23:45 to 6:00'
             },
             {
@@ -142,6 +156,7 @@ const myApp = new Vue({
                 cover: 'https://res.cloudinary.com/xceed-me/image/upload/f_auto/v1568303847/events/cover/the-room-1568303845.png.jpg',
                 date: 'Fri 20-Sep-2019',
                 price: '10',
+                month: 'september',
                 hours: ' 23:45 to 5:45'
             },
             {
@@ -154,6 +169,7 @@ const myApp = new Vue({
                 cover: 'https://res.cloudinary.com/xceed-me/image/upload/c_fill,f_auto,h_241,w_650/v1568203853/events/cover/sanpapa-club-opening-party-1568203852.jpeg.jpg',
                 date: 'Sat 28-Sep-2019',
                 price: '15',
+                month: 'september',
                 hours: '23:59 to 6:00'
             },
         ],
@@ -162,6 +178,7 @@ const myApp = new Vue({
         purchased: function (party) {
             return 'Ticket To ' + party + ' purchase! ' + this.name;
         },
+
         showHomeOnly: function () {
             this.showHome = true;
             this.homeShowParties = false;
@@ -187,6 +204,7 @@ const myApp = new Vue({
                 this.price = 'Tickets ' + this.chosenParty.price + ' €';
             }
         },
+
         showChatOnly: function () {
             this.showHome = false;
             this.homeShowParties = false;
@@ -195,6 +213,7 @@ const myApp = new Vue({
             this.showDropDown = false;
             this.chosenPartyPage = false;
         },
+
         showChatTextOnly: function () {
             this.showHome = false;
             this.homeShowParties = false;
@@ -203,6 +222,7 @@ const myApp = new Vue({
             this.chosenPartyPage = false;
             this.chatText = true;
         },
+
         photoFancyBox: function (e) {
             $.fancybox.open({
                 src: '#hidden-content',
@@ -234,6 +254,7 @@ const myApp = new Vue({
                 this.price = 'Tickets ' + this.chosenParty.price + ' €';
             }
         },
+
         partiesHorizontal: function () {
             this.showHome = false;
             this.homeShowParties = true;
@@ -254,25 +275,26 @@ const myApp = new Vue({
 
 
         },
+
         purchased: function () {
             alert('You are IN!!!');
         },
+
         normalSignIn: function () {
             let email = "someEmail";
             let password = "somePassword";
             firebase.auth().normalSignIn(email, password);
         },
+
         googleSignIn: function () {
             let provider = new firebase.auth.GoogleAuthProvider();
             firebase.auth().signInWithPopup(provider).then(function (result) {
                 this.resultObject = result;
                 myApp.username = result.user.displayName;
                 myApp.userEmail = result.user.email;
-                console.log(resultObject);
 
             });
-            console.log(this.username + '1');
-            console.log(this.resultObject);
+            myApp.showChatTextOnly();
 
         },
 
@@ -317,19 +339,17 @@ const myApp = new Vue({
 
         receiveInformationDatabase: function () {
             firebase.database().ref('Users').once('value', function (data) {
-                let datos = data.val();
+                let myData = data.val();
 
-                for (mensaje in datos) {
-                    let name = datos[mensaje].userName
-                    let message = datos[mensaje].message
-                    $('#test-div-info').append('<div class="myMsg"><p>' + name + '</p></div>' + '<div class="myMsg2"><p>' + message + '</p></div>');
+                for (messages in myData) {
+                    let name = myData[messages].userName
+                    let message = myData[messages].message
+                    $('#test-div-info').append('<div class="myMsg-main"><div class="myMsg"><p class="user-fonts">' + name + '</p></div> <div class="myMsg2"><p class="msg-fonts">' + message + '</p></div></div>');
 
                 }
 
             })
         },
-
-
 
         signOut: function () {
             firebase.auth().signOut().then(function () {
@@ -337,19 +357,52 @@ const myApp = new Vue({
             }).catch(function (error) {
 
             });
-            console.log('signed out');
+            myApp.showChatOnly();
+        },
 
-        }
+        changeMonthPlus: function(){
+            this.monthByCliking = this.monthByCliking + 1;
+            if(this.monthByCliking >= 12){
+                this.monthByCliking = 0; 
+            }
+            myApp.myMonth();
+        },
 
+        changeMonthMinus: function(){
+            this.monthByCliking = this.monthByCliking - 1;
+            if(this.monthByCliking < 0){
+                this.monthByCliking = 11;
+            }
+            myApp.myMonth();
+        },
 
-        // firebaseHeadingRefFunction: function(){
-        //     this.firebaseHeadingRef = firebaseHeadingRef.on('value', function(datasnapshot){
-        //         this.fireHeading.innerHTML = datasnapshot.val();
-        //     });
-        //     console.log('this is working also');
-        // }
-
-
+        myMonth: function(){
+           let x =  this.monthsArray[this.monthByCliking];
+           this.chosenMonth = x;        
+        },
+        
+        clickToFilter: function(){
+            this.parties = this.filteredPartyArray;
+        },
+        
+        filterParties: function(){
+            for (let i = 0 ; i < this.parties.length ; i++){
+                console.log(444);
+                
+                if(this.parties[i].month == this.chosenMonth){
+                    console.log(555);
+                    this.filteredPartyArray.push(this.parties[i]);
+                    console.log(this.filteredPartyArray);
+                    
+                    // this.parties = this.filteredPartyArray;
+                }
+            }
+            
+            console.log(123);
+            
+            
+        },
+        
 
     },
 

@@ -56,9 +56,9 @@
             <div class="description">Discover the best parties and nightclubs in your city</div>
             <div class="home-buttons">
                 <button v-on:click="showPartiesOnly" class="btn parties-button"> Parties </button>
-                <button v-on:click="partiesHorizontal" class="btn parties-button-hor"> Parties </button>
+
                 <button v-on:click="showChatOnly" class="btn chat-button">
-                    <span class="fas fa-comments fa-2x chatSize"></span>
+                    <span class="fas fa-comments fa-1x chatSize"></span> Chat
                 </button>
             </div>
 
@@ -70,7 +70,7 @@
         <!-- Parties Catalog DIV -->
 
         <div v-if="homeShowParties" class="parties-catalog-container">
-            <header>
+            <header class="sticky">
                 <div class="back-button">
                     <button v-on:click="showHomeOnly" class="btn"><span
                             class="fas fa-chevron-left fa-2x"></span></button>
@@ -97,41 +97,60 @@
                 </div>
             </header>
 
-            <div v-for="party in parties" class="parties-vertical">
-                <button class="btn parties-cards  ">
-                    <img v-bind:src="party.cover" v-on:click="showChosenPartyOnly(party)" alt="1" width="300"
-                        class="parties-cards-img">
-                </button>
+            <div class="sign-out-s-main">
+                <span v-on:click="filterDiv = !filterDiv" class="fas fa-filter fa-2x filter-s"></span>
+            </div>
+            
+            <div v-if="filterDiv" class="filter-bar" id="filter-bar">
+                <div class="filter-bar-right">
+                    <button @click="changeMonthMinus" class="btn plus"><span class="fas fa-caret-left fa-2x"></span></button>
+                    <h4 class="chosen-month"> {{ chosenMonth }} </h4>
+                    <button @click="changeMonthPlus" class="btn plus"><span class="fas fa-caret-right fa-2x"></span></button>
+                </div>
+                <div class="filter-bar-left">
+                    <span @click="filterParties" class="fas fa-check fa-2x"></span>
+                </div>
+            </div>
+            
+            <div class="parties-vertical-main">
+                <div v-for="party in parties" class="parties-vertical">
+                    <button class="btn parties-cards  ">
+                        <img v-bind:src="party.cover" v-on:click="showChosenPartyOnly(party)" alt="1" width="300"
+                            class="parties-cards-img">
+                    </button>
+                </div>
             </div>
 
-            <div v-for="party in parties" class="parties-horizontal">
-                <button class="btn parties-cards  ">
-                    <img v-bind:src="party.cover" v-on:click="showChosenPartyOnly(party)" alt="1" width="300"
-                        class="parties-cards-img">
-                </button>
+            <div class="parties-vertical-main-hor" >
+                <div v-for="party in parties" class="parties-horizontal">
+                    <button class="btn parties-cards  ">
+                        <img v-bind:src="party.cover" v-on:click="showChosenPartyOnly(party)" alt="1" width="300"
+                            class="parties-cards-img">
+                    </button>
 
-                <div class="hor-4-section">
-                    <div class="hor-4-section-top">
-                        <div class="btn btn-dark parties-horizontal-extra">
-                            {{party.music}}
+                    <div class="hor-4-section">
+                        <div class="hor-4-section-top">
+                            <div class="btn btn-dark parties-horizontal-extra">
+                                {{party.music}}
+                            </div>
+                            <div class="btn btn-dark parties-horizontal-extra">
+                                {{party.hours}}
+                            </div>
                         </div>
-                        <div class="btn btn-dark parties-horizontal-extra">
-                            {{party.hours}}
-                        </div>
-                    </div>
-                    <div class="hor-4-section-bottom">
-                        <button class="btn btn-dark parties-horizontal-extra">
-                            {{party.date}}
-                        </button>
-                        <div class="parties-horizontal-extra ">
-                            <button v-on:click="purchased" class="btn btn-dark price-but-hor"
-                                v-if="party.price == 'FREE'">
-                                Free Entrance
+                        <div class="hor-4-section-bottom">
+                            <button class="btn btn-dark parties-horizontal-extra">
+                                {{party.date}}
                             </button>
-                            <button v-on:click="purchased" class="btn btn-dark price-but-hor" v-else>
-                                Tickets {{party.price}} €
-                            </button>
+                            <div class="parties-horizontal-extra ">
+                                <button v-on:click="purchased" class="btn btn-dark price-but-hor"
+                                    v-if="party.price == 'FREE'">
+                                    Free Entrance
+                                </button>
+                                <button v-on:click="purchased" class="btn btn-dark price-but-hor" v-else>
+                                    Tickets {{party.price}} €
+                                </button>
 
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -146,7 +165,7 @@
 
             <header>
                 <div class="back-button">
-                    <button v-on:click="showHomeOnly" class="btn"><span
+                    <button v-on:click="showPartiesOnly" class="btn"><span
                             class="fas fa-chevron-left fa-2x"></span></button>
                 </div>
 
@@ -241,7 +260,7 @@
 
                 <div class="chosen-party-hor-upper-div">
                     <div class="chosen-pic-hor">
-                        <a v-on:click="photoFancyBox">
+                        <a v-on:click="">
                             <img id="hidden-content" v-bind:src="chosenParty.cover" alt="1" class="chosen-pic-img-hor">
                         </a>
                     </div>
@@ -280,10 +299,10 @@
         <!-- Chat - Main Page  -->
 
         <div v-if="homeShowChat" class="chat-main">
-            <header>
+            <header class="header-chat-text">
                 <div class="back-button">
                     <button v-on:click="showHomeOnly" class="btn"><span
-                            class="fas fa-chevron-left fa-2x"></span></button>
+                            class="fas fa-chevron-left fa-2x back-btm-white"></span></button>
                 </div>
 
                 <div class="logo-header">
@@ -294,7 +313,7 @@
                     <div class="dropdown">
                         <button v-on:click="showDropDown = !showDropDown" class="btn menu-drop-down" type="button"
                             id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="fas fa-bars fa-2x"></span>
+                            <span class="fas fa-bars fa-2x back-btm-white"></span>
                         </button>
                         <div v-show="showDropDown" class="dropdown-menu dropdown-menu-right show"
                             aria-labelledby="dropdownMenuButton">
@@ -311,37 +330,12 @@
 
                 <h5 class="chat-login-btn">Come meet new people</h5>
                 <div class="chat-login-form">
-                    <span class="pass-hor">
-                        <div class="form-group">
-                            <label for="exampleDropdownFormEmail2">Email address</label>
-                            <input type="email" class="form-control" id="exampleDropdownFormEmail2"
-                                placeholder="email@example.com">
+                    <div v-on:click="googleSignIn" class="google-btn">
+                        <div class="google-icon-wrapper">
+                            <img class="google-icon"
+                                src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" />
                         </div>
-                        <div class="form-group">
-                            <label for="exampleDropdownFormPassword2">Password</label>
-                            <input type="password" class="form-control" id="exampleDropdownFormPassword2"
-                                placeholder="Password">
-                        </div>
-                    </span>
-
-
-                    <div class="form-group">
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="dropdownCheck2">
-                            <label class="form-check-label" for="dropdownCheck2">
-                                Remember me
-                            </label>
-                        </div>
-                    </div>
-                    <div>
-                        <button v-on:click="googleSignIn" type="submit" class="btn google-btn"><img src="./google_PNG19644.png" alt="1" width="50"></button>
-                        <button v-on:click="showChatTextOnly" type="submit" class="btn btn-dark">Sign in</button>
-                    </div>
-                    
-                    <div class="dropdown-divider"></div>
-                    <div>
-                        <a class="dropdown-item" href="#">New around here? Sign up</a>
-                        <a class="dropdown-item" href="#">Forgot password?</a>
+                        <p class="btn-google">Sign in with google</p>
                     </div>
                 </div>
                 <p class="copyright">Copyright 2019 | Nightlife.Es </p>
@@ -356,8 +350,8 @@
         <div id="chatText1" v-if="chatText" class="chat-main-text">
             <header class="header-chat-text">
                 <div class="back-button">
-                    <button v-on:click="showHomeOnly" class="btn"><span
-                            class="fas fa-chevron-left fa-2x"></span></button>
+                    <button v-on:click="showChatOnly" class="btn"><span
+                            class="fas fa-chevron-left fa-2x back-btm-white"></span></button>
                 </div>
 
                 <div class="logo-header">
@@ -368,7 +362,7 @@
                     <div class="dropdown">
                         <button v-on:click="showDropDown = !showDropDown" class="btn menu-drop-down" type="button"
                             id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="fas fa-bars fa-2x"></span>
+                            <span class="fas fa-bars fa-2x back-btm-white"></span>
                         </button>
                         <div v-show="showDropDown" class="dropdown-menu dropdown-menu-right show"
                             aria-labelledby="dropdownMenuButton">
@@ -380,21 +374,27 @@
 
                 </div>
 
-                <button v-on:click="signOut">Sign Out</button>
+
             </header>
 
-            <div id="chatText2" class="chat-text-main">
-                <div id="chatText3" class="chat-msg">
-                    <div id="test-div-info">
+            <div id="chatText2" class="chat-text-main ">
+                <div id="chatText3" class="chat-msg scrollable">
+                    <div class="sign-out-s-main">
+                        <span class="fas fa-sign-out-alt fa-2x back-btm-white sign-out-s rounded-circle"
+                            v-on:click="signOut"></span>
+                    </div>
+                    <div id="test-div-info" class=" allMyMsg">
 
                     </div>
                 </div>
                 <div class="chat-send">
                     <div class="text-input">
-                        <input v-on:keyup.enter="submitClick" id="mainText"  class="msg-box" type="text" placeholder="Write a message here...">
+                        <input v-on:keyup.enter="submitClick" id="mainText" class="msg-box" type="text"
+                            placeholder="Write a message here...">
                     </div>
                     <div class="send">
-                        <button id="submitBtn" @click="submitClick" class="btn"><span class="fas fa-paper-plane fa-2x send-icon"></span></button>
+                        <button id="submitBtn" @click="submitClick" class="btn"><span
+                                class="fas fa-paper-plane fa-2x send-icon"></span></button>
                     </div>
                 </div>
             </div>
@@ -417,8 +417,8 @@
             messagingSenderId: "174742692587",
             appId: "1:174742692587:web:2bd2504fdb0e674ef994ae",
             measurementId: "G-KBY4SYZLMJ"
-            };
-            firebase.initializeApp(firebaseConfig);
+        };
+        firebase.initializeApp(firebaseConfig);
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
