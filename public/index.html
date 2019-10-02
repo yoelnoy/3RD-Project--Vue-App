@@ -100,18 +100,18 @@
             <div class="sign-out-s-main">
                 <span v-on:click="filterDiv = !filterDiv" class="fas fa-filter fa-2x filter-s"></span>
             </div>
-            
-            <div v-if="filterDiv" class="filter-bar" id="filter-bar">
-                <div class="filter-bar-right">
-                    <button @click="changeMonthMinus" class="btn plus"><span class="fas fa-caret-left fa-2x"></span></button>
+
+            <div class="center-filter-bar">
+                <div v-if="filterDiv" class="filter-bar" id="filter-bar">
+                    <button @click="changeMonthMinus" class="btn plus"><span id="plus"
+                            class="fas fa-caret-left fa-2x"></span></button>
                     <h4 class="chosen-month"> {{ chosenMonth }} </h4>
-                    <button @click="changeMonthPlus" class="btn plus"><span class="fas fa-caret-right fa-2x"></span></button>
-                </div>
-                <div class="filter-bar-left">
-                    <span @click="filterParties" class="fas fa-check fa-2x"></span>
+                    <button @click="changeMonthPlus" class="btn plus"><span id="plus"
+                            class="fas fa-caret-right fa-2x"></span></button>
                 </div>
             </div>
-            
+            <p id="sorry-msg"></p>
+
             <div class="parties-vertical-main">
                 <div v-for="party in parties" class="parties-vertical">
                     <button class="btn parties-cards  ">
@@ -121,7 +121,7 @@
                 </div>
             </div>
 
-            <div class="parties-vertical-main-hor" >
+            <div class="parties-vertical-main-hor">
                 <div v-for="party in parties" class="parties-horizontal">
                     <button class="btn parties-cards  ">
                         <img v-bind:src="party.cover" v-on:click="showChosenPartyOnly(party)" alt="1" width="300"
@@ -231,7 +231,7 @@
 
             <header>
                 <div class="back-button">
-                    <button v-on:click="showHomeOnly" class="btn"><span
+                    <button v-on:click="showPartiesOnly" class="btn"><span
                             class="fas fa-chevron-left fa-2x"></span></button>
                 </div>
 
