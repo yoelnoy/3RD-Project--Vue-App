@@ -1,7 +1,6 @@
 const myApp = new Vue({
     el: '#vue-app',
     data: {
-        //https://api.myjson.com/bins/1epegx   //
         myName: 'Yoel',
         counter: 0,
         showHome: true,
@@ -22,7 +21,7 @@ const myApp = new Vue({
         parties: [],
         parties2: [],
         month: 'January',
-        monthsArray: ['All', 'January', 'Februery', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        monthsArray: ['All', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
         jsonUrl: "https://api.myjson.com/bins/1epegx",
 
         mainText: document.getElementById("mainText"),
@@ -39,16 +38,17 @@ const myApp = new Vue({
 
     },
     created(){
-      
       this.ajaxCall();
-        
     },
 
+    // All functions for the web app
     methods: {
+        // Popup window after clicking the purchase button announcing the purchase
         purchased: function (party) {
             return 'Ticket To ' + party + ' purchase! ' + this.name;
         },
 
+        //When clicked only the Home section in the html will show
         showHomeOnly: function () {
             this.showHome = true;
             this.homeShowParties = false;
@@ -58,6 +58,7 @@ const myApp = new Vue({
             this.chatText = false;
         },
 
+        //When clicked only the Parties section in the html will show
         showPartiesOnly: function (party) {
             this.showHome = false;
             this.homeShowParties = true;
@@ -74,7 +75,7 @@ const myApp = new Vue({
                 this.price = 'Tickets ' + this.chosenParty.price + ' €';
             }
         },
-
+        //When clicked only the Chat section in the html will show (not available at the moment)
         showChatOnly: function () {
             this.showHome = false;
             this.homeShowParties = false;
@@ -93,6 +94,7 @@ const myApp = new Vue({
             this.chatText = true;
         },
 
+        // not available at the moment
         photoFancyBox: function (e) {
             $.fancybox.open({
                 src: '#hidden-content',
@@ -104,6 +106,7 @@ const myApp = new Vue({
             });
         },
 
+        //After chosing a party from the list the chose party section will be filled with info from json and be the only section to show
         showChosenPartyOnly: function (party) {
             this.showHome = false;
             this.homeShowParties = false;
@@ -125,6 +128,7 @@ const myApp = new Vue({
             }
         },
 
+        //When turned horizintaly homeShowParties will show
         partiesHorizontal: function () {
             this.showHome = false;
             this.homeShowParties = true;
@@ -142,32 +146,30 @@ const myApp = new Vue({
                     this.price = 'Tickets ' + this.parties[i].price + ' €';
                 }
             }
-
-
         },
 
         purchased: function () {
             alert('You are IN!!!');
         },
-
+         //Sign in with email and password
         normalSignIn: function () {
             let email = "someEmail";
             let password = "somePassword";
             firebase.auth().normalSignIn(email, password);
         },
-
+         //sign in by google
         googleSignIn: function () {
             let provider = new firebase.auth.GoogleAuthProvider();
             firebase.auth().signInWithPopup(provider).then(function (result) {
                 this.resultObject = result;
                 myApp.username = result.user.displayName;
                 myApp.userEmail = result.user.email;
-
             });
             myApp.showChatTextOnly();
 
         },
 
+        //Sending a message in the chat
         submitClick: function () {
             const myNode = document.getElementById("test-div-info");
             myNode.innerHTML = '';
@@ -177,6 +179,7 @@ const myApp = new Vue({
             document.getElementById('mainText').value = '';
         },
 
+        // Send to DB the message the user sent
         sendInformationDatabase: function () {
             let messageText = mainText.value;
             let newKey = firebase.database().ref('/Users').push().key;
@@ -187,9 +190,9 @@ const myApp = new Vue({
                 message: messageText
             }
             firebase.database().ref().update(updates);
-
         },
 
+        // Retriving messages from DB to front end
         receiveInformationDatabase: function () {
             firebase.database().ref('Users').once('value', function (data) {
                 let myData = data.val();
@@ -198,12 +201,11 @@ const myApp = new Vue({
                     let name = myData[messages].userName
                     let message = myData[messages].message
                     $('#test-div-info').append('<div class="myMsg-main"><div class="myMsg"><p class="user-fonts">' + name + '</p></div> <div class="myMsg2"><p class="msg-fonts">' + message + '</p></div></div>');
-
                 }
-
             })
         },
 
+        // Signing out
         signOut: function () {
             firebase.auth().signOut().then(function () {
 
@@ -213,6 +215,7 @@ const myApp = new Vue({
             myApp.showChatOnly();
         },
 
+        // Increasing the months by numeric order
         changeMonthPlus: function(){
             this.monthByCliking = this.monthByCliking + 1;
             if(this.monthByCliking >= 13){
@@ -222,6 +225,7 @@ const myApp = new Vue({
             myApp.filterParties();
         },
 
+        // Decreasing the months by numeric order
         changeMonthMinus: function(){
             this.monthByCliking = this.monthByCliking - 1;
             if(this.monthByCliking < 0){
@@ -235,12 +239,12 @@ const myApp = new Vue({
            let x =  this.monthsArray[this.monthByCliking];
            this.chosenMonth = x;        
         },
-            
+        
+        // Filtering the array of parties by the info the other functions provided
         filterParties: function(){ 
             document.getElementById('plus');
             this.filteredPartyArray = [];
             for (let i = 0 ; i < this.parties2.length ; i++){
-
                 if(this.parties2[i].month == this.chosenMonth){
                     this.filteredPartyArray.push(this.parties2[i]);
                     document.getElementById('sorry-msg').innerHTML = '';
@@ -254,15 +258,12 @@ const myApp = new Vue({
 
                 }else{
                     document.getElementById('sorry-msg').innerHTML = "<h3>We're sorry, no parties found</h3>";
-
                 }
-                 
                 this.parties = this.filteredPartyArray;
             }
-           
-            
         },
-
+        
+        // Calling to the json i've created in a seperate file to mimic calls to a server
         ajaxCall: function(){
             fetch("https://api.myjson.com/bins/1epegx").then(function (response) {
                 if (response.ok) {
@@ -273,25 +274,11 @@ const myApp = new Vue({
             }).then(function (json) {
                 myApp.parties2 = json;
                 myApp.parties = json;
-                
-                
-                console.log(myApp.parties);
-                console.log(myApp.parties2);
-
-                
-                //functions->
-                
-            }).catch(function (error) {
-            
-            });
-        
+            }).catch(function (error) {           
+            });      
         }
-
     },
     
-
-
-
 });
 
 

@@ -6,11 +6,7 @@ header {
     width: 375px;
     border-bottom: solid 1px;
 }
-/* .sticky {
-    position: fixed;
-    top: 0;
-    width: 100%;
-  } */
+
 .chosen-vertical {
     display: block;
     width: 375px;
@@ -108,9 +104,6 @@ header {
     height: 55px;
 
 }
-
-
-
 
 /* --------------------------- */
 header {

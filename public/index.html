@@ -29,46 +29,27 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://kit.fontawesome.com/dd21d5e485.js"></script>
 
-    <!-- update the version number as needed -->
-    <!-- <script defer src="/__/firebase/6.6.2/firebase-app.js"></script> -->
-    <!-- include only the Firebase features as you need -->
-    <!-- <script defer src="/__/firebase/6.6.2/firebase-auth.js"></script>
-    <script defer src="/__/firebase/6.6.2/firebase-database.js"></script>
-    <script defer src="/__/firebase/6.6.2/firebase-messaging.js"></script>
-    <script defer src="/__/firebase/6.6.2/firebase-storage.js"></script> -->
-    <!-- initialize the SDK after all desired features are loaded -->
-    <!-- <script defer src="/__/firebase/init.js"></script> -->
-
     <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
-    <!-- <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-auth.js"></script> -->
 </head>
-
-
 
 <body>
     <div id="vue-app" class="body-main">
 
         <!-- Home Page DIV -->
-
         <div v-if="showHome" class="home-container">
             <div class="logo"><img src="./Logo-White-NightLife.png" alt="logo" class="logo-Home"></div>
 
             <div class="description">Discover the best parties and nightclubs in your city</div>
             <div class="home-buttons">
                 <button v-on:click="showPartiesOnly" class="btn parties-button"> Parties </button>
-
-                <button v-on:click="working" class="btn chat-button">
+                <!-- <button v-on:click="showChatOnly" class="btn chat-button">
                     <span class="fas fa-comments fa-1x chatSize"></span> Chat
-                </button>
+                </button> -->
             </div>
 
         </div>
 
-        <!-- ----------------------------------------- -->
-
-
         <!-- Parties Catalog DIV -->
-
         <div v-if="homeShowParties" class="parties-catalog-container">
             <header class="sticky">
                 <div class="back-button">
@@ -90,7 +71,7 @@
                             aria-labelledby="dropdownMenuButton">
                             <button v-on:click="showHomeOnly" class="dropdown-item">Home</button>
                             <button v-on:click="showPartiesOnly" class="dropdown-item">Parties</button>
-                            <button v-on:click="showChatOnly" class="dropdown-item">Chat</button>
+                            <!--<button v-on:click="showChatOnly" class="dropdown-item">Chat</button>-->
                         </div>
                     </div>
 
@@ -157,10 +138,7 @@
             </div>
         </div>
 
-        <!-- ----------------------------------------- -->
-
         <!-- Chosen Party DIV -->
-
         <div v-if="chosenPartyPage" class="party-container chosen chosen-vertical">
 
             <header>
@@ -183,15 +161,13 @@
                             aria-labelledby="dropdownMenuButton">
                             <button v-on:click="showHomeOnly" class="dropdown-item">Home</button>
                             <button v-on:click="showPartiesOnly" class="dropdown-item">Parties</button>
-                            <button v-on:click="showChatOnly" class="dropdown-item">Chat</button>
+                            <!-- <button v-on:click="showChatOnly" class="dropdown-item">Chat</button> -->
                         </div>
                     </div>
-
                 </div>
             </header>
 
             <div class="chosen-cont">
-
                 <div>
                     <div class="chosen-pic">
                         <a v-on:click="photoFancyBox">
@@ -221,14 +197,10 @@
                 <div v-html="map" class="party-map">
 
                 </div>
-
             </div>
         </div>
 
-        <!-- ------------------ -->
-
         <div v-if="chosenPartyPage" class="party-container chosen chosen-horizontal">
-
             <header>
                 <div class="back-button">
                     <button v-on:click="showPartiesOnly" class="btn"><span
@@ -249,9 +221,9 @@
                             aria-labelledby="dropdownMenuButton">
                             <button v-on:click="showHomeOnly" class="dropdown-item">Home</button>
                             <button v-on:click="showPartiesOnly" class="dropdown-item">Parties</button>
-                            <button v-on:click="showChatOnly" class="dropdown-item">Chat</button>
+                            <!--<button v-on:click="showChatOnly" class="dropdown-item">Chat</button>-->
                         </div>
-                    </div>
+                    </div>  
 
                 </div>
             </header>
@@ -290,15 +262,11 @@
             </div>
         </div>
 
-        <!-- ----------------------------------------- -->
-
-
-
         <!-- Chat DIV -->
 
         <!-- Chat - Main Page  -->
 
-        <div v-if="homeShowChat" class="chat-main">
+        <!-- <div v-if="homeShowChat" class="chat-main">
             <header class="header-chat-text">
                 <div class="back-button">
                     <button v-on:click="showHomeOnly" class="btn"><span
@@ -344,10 +312,10 @@
 
             </div>
 
-        </div>
+        </div> -->
 
         <!-- Chat - Text Page  -->
-        <div id="chatText1" v-if="chatText" class="chat-main-text">
+        <!-- <div id="chatText1" v-if="chatText" class="chat-main-text">
             <header class="header-chat-text">
                 <div class="back-button">
                     <button v-on:click="showChatOnly" class="btn"><span
@@ -398,10 +366,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-
-        <!-- ----------------------------------------- -->
+        </div> -->
 
 
     </div>
@@ -424,7 +389,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
     <script src="js/Vue-javascript-3.js"></script>
-    <script src="js/whatever.js"></script>
+    <script src="js/myJson.js"></script>
     <script src="js/fancybox.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- <script src="/__/firebase/init.js"></script> -->
